@@ -1,0 +1,23 @@
+# OS Files
+Thumbs.db
+.DS_Store
+
+# node.js
+node_modules
+uploads
+db
+*-lock.json
+resources
+.env
+
+# redis info
+/dao/keys.json
+
+
+
+# agora info
+/service/agora-key.json
+/service/azure-key.json
+
+../invigilante_key     
+../invigilante_key.pub

@@ -1,0 +1,11 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.site-name {
+    font-size: 20px;
+}
+
+.tool-bar {
+    background: linear-gradient(to left, #eda465 0%, #ff6666 120%);
+}

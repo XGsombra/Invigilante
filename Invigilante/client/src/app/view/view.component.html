@@ -1,0 +1,153 @@
+<mat-grid-list cols='1' rowHeight='60px'>
+
+  <div *ngIf="!this.agoraService.status.connected">
+    <mat-grid-tile>
+      <div class="exam-tip">
+        <mat-icon [inline]="true" color='warn'>warning_amber</mat-icon>
+        You are about to enter an exam
+        <mat-icon [inline]="true" color='warn'>warning_amber</mat-icon>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="!this.userService.isInstructor() && !this.idUploaded">
+      <app-id-upload (onIdUploaded)="afterUploaded($event)"></app-id-upload>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="this.userService.isInstructor()">
+      <button mat-stroked-button class="btn-block" color="primary"
+              (click)="this.agoraService.createCall(getCourseName())">Enter Exam
+      </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="!this.userService.isInstructor() && this.idUploaded">
+      <button mat-stroked-button class="btn-block" color="primary"
+              (click)="this.agoraService.startBasicCall(getCourseName())">Join Exam
+      </button>
+    </mat-grid-tile>
+  </div>
+
+  <div *ngIf="this.agoraService.status.connected == true">
+    <mat-grid-tile>
+      <button mat-stroked-button class="btn-block" color="primary" (click)="leaveCall()">
+        Leave Call
+      </button>
+      <button *ngIf="this.userService.isInstructor()" mat-stroked-button class="btn-block" color="primary" (click)="this.screenShot()">
+        Screenshot
+      </button>
+      <button *ngIf="this.userService.isInstructor()" mat-stroked-button class="btn-block" color="primary" (click)="this.showIpCheck()">
+        Check IP's
+      </button>
+      <button mat-stroked-button class="btn-block" color="primary" (click)="this.agoraService.toggleAudio()">
+        {{this.agoraService.status.audioEnabled ? 'Mute' : 'Unmute'}} Audio
+      </button>
+      <button mat-stroked-button class="btn-block" color="primary" (click)="this.agoraService.toggleVideo()">
+        {{this.agoraService.status.videoEnabled ? 'Mute' : 'Unmute'}} Video
+      </button>
+    </mat-grid-tile>
+  </div>
+
+</mat-grid-list>
+
+<div *ngIf="this.agoraService.status.connected">
+
+  <div class="margin-tb" *ngIf="this.userService.isInstructor()">
+    <mat-form-field class="promote-chip-list">
+      <mat-label>Invigilators Promotion</mat-label>
+      <mat-chip-list #chipList aria-label="Invigilator selection">
+        <mat-chip *ngFor="let user of this.agoraService.invigilators">{{user.toString()}}</mat-chip>
+        <input
+          placeholder="New invigilator..."
+          #userInput
+          [formControl]="this.agoraService.userCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="addInvigilator($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let user of this.agoraService.filteredUsers | async" [value]="user">
+          {{user}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+
+  <div class="margin-tb" *ngIf="!this.userService.isInstructor()">
+    <mat-chip-list aria-label="Invigilator display">
+      <mat-chip color="primary" selected>Invigilators:</mat-chip>
+      <mat-chip *ngFor="let invigilator of this.agoraService.invigilators">{{invigilator}}</mat-chip>
+      <!--    <mat-chip>One fish</mat-chip>-->
+      <!--    <mat-chip>Two fish</mat-chip>-->
+      <!--    <mat-chip color="primary" selected>Primary fish</mat-chip>-->
+      <!--    <mat-chip color="accent" selected>Accent fish</mat-chip>-->
+    </mat-chip-list>
+  </div>
+</div>
+
+<div *ngIf="this.agoraService.status.connected">
+  <mat-grid-list cols="4">
+    <mat-grid-tile [colspan]=2>
+      <div id="agora_local"></div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=2 *ngIf="this.userService.isInstructor()">
+      <mat-selection-list #list [(ngModel)]="newSelectedStudents" (ngModelChange)="processScreenShotResult()">
+
+        <div class='student-entry' *ngFor="let student of this.agoraService.remoteUsers">
+          <a mat-icon-button color="primary" (click)="this.showId(student.name, student.email)">
+            <mat-icon>face</mat-icon>
+          </a>
+
+          <mat-list-option [value]="student.email">
+            <div *ngIf="!student.isSus">
+              <mat-icon [inline]="true" [ngStyle]="{color: 'green'}">check_circle_outline</mat-icon>
+              {{ student.name }} - confidence: {{student.confidence}}
+            </div>
+            <div *ngIf="student.isSus">
+              <mat-icon color='warn' [inline]="true">warning_amber</mat-icon>
+              {{ student.name }} - confidence: {{student.confidence}} {{ student.message }}
+            </div>
+            <mat-divider></mat-divider>
+          </mat-list-option>
+        </div>
+
+
+
+
+      </mat-selection-list>
+
+      <!-- <mat-list>
+        <mat-list-item *ngFor="let student of this.agoraService.remoteUsers">
+
+          <button mat-button (click)="processScreenShotResult(student.email)">
+            <mat-icon *ngIf="student.isSus">warning_amber</mat-icon>
+            <mat-icon *ngIf="!student.isSus">check_circle_outline</mat-icon>
+            <span>
+              {{ student.name }}: {{student.confidence}}
+              {{ student.message }}
+            </span>
+          </button>
+
+        </mat-list-item>
+      </mat-list> -->
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" *ngIf="!this.userService.isInstructor()" style="overflow: scroll">
+      <div id="local-stats"></div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="5">
+    <mat-grid-tile class="round-tile" [colspan]=1 *ngFor="let user of this.agoraService.remoteUsers" id="remote-tile-{{user.email}}"
+      [ngStyle]="{'margin-left': '10px', 'margin-right': '10px', 'margin-bottom': '10px'}">
+      <div class="remote_calls" id="agora_remote{{user.email}}" [ngStyle]="{'width': '100%', 'height': '100%'}">
+        {{user.name}} ({{user.email}})
+      </div>
+    </mat-grid-tile>
+    <!--    <div class="remote_calls" *ngFor="let track of this.agoraService.remoteTracks;" [id]="track">-->
+    <!--    </div>-->
+  </mat-grid-list>
+
+  <div id="do-it-here"></div>
+</div>

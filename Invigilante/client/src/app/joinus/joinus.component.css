@@ -1,0 +1,45 @@
+.joinus-button {
+    width: 250px!important;
+    min-width: unset!important;
+    font-size: 24px;
+}
+
+.round-tile{
+    border: 2px solid white;
+    border-radius: 25px;
+    margin-top: 3px;
+    height: 100px;
+    width: calc(50% - 6px)
+}
+
+.left-tile{
+    float: left;
+}
+
+.right-tile{
+    float: right;
+}
+
+.bottom-mat-divider{
+    border-top-width: 3px;
+    border-top-style: dashed;
+}
+
+.slogan {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 100%;
+}
+
+.slogan-icon{
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.bottom-border-tile{
+    border-bottom: 2px solid white;
+}

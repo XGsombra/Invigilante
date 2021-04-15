@@ -1,0 +1,42 @@
+#agora_local{
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+.round-tile{
+  border: 2px solid #eda465;
+  border-radius: 10px;
+}
+
+.exam-tip {
+  font-size: 22px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.promote-chip-list {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.margin-tb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.focused-screen {
+  background-color: #eda465;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+.student-entry{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

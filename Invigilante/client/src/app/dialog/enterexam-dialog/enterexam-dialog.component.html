@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+
+    <mat-card class="box">
+        <mat-card-header>
+            <mat-card-title>Enter exam</mat-card-title>
+        </mat-card-header>
+  
+        <form class="signin-form">
+            <mat-card-content>
+
+                <mat-form-field>
+                    <input matInput [(ngModel)]="examPass" placeholder="Exam password" type="password" name="examPass" required />
+                </mat-form-field>
+
+            </mat-card-content>
+            
+            <button mat-stroked-button color="accent" class="btn-block" color="primary" (click)="validateStudent()">enter</button>
+        </form>
+    </mat-card>
+  
+</div>

@@ -1,0 +1,47 @@
+<mat-grid-list cols="4" rowHeight="300px">
+
+    <mat-grid-tile [colspan]=1 class='bottom-border-tile' style="border-right: 2px solid white;">
+        <mat-icon class='slogan-icon'>trending_up</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=3 class='bottom-border-tile'>
+        <div class='slogan'>The Best Application To Take Exams In The World.</div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=3>
+        <div class='slogan'>Start Whenver You Want In Less Than A Minute.</div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=1 style="border-left: 2px solid white;">
+        <mat-icon class='slogan-icon'>access_alarm</mat-icon>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+
+<mat-divider class='bottom-mat-divider'></mat-divider>
+
+
+<mat-grid-list cols="2" rowHeight="150px">
+    
+    <mat-grid-tile [colspan]=1 [rowspan]=1>
+        <button mat-button class="joinus-button" (click)="renderSignupForm(1)">
+            <mat-icon [inline]="true" style="font-size: 30px;">insert_emoticon</mat-icon>
+            <div class='slogan'>Join as a student!</div>
+        </button>
+    </mat-grid-tile>
+    
+    <mat-grid-tile [colspan]=1 [rowspan]=1>
+        <button mat-button class="joinus-button" (click)="renderSignupForm(0)">
+            <mat-icon [inline]="true" style="font-size: 30px;">support_agent</mat-icon>
+            <div class='slogan'>Join as an instructor!</div>
+        </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=2 [rowspan]=1>
+        <button mat-button (click)="showCreditPage()">
+            <div>Credit</div>
+        </button>
+    </mat-grid-tile>
+
+</mat-grid-list>

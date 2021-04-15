@@ -1,0 +1,23 @@
+.texts {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 100%;
+}
+
+.item {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.citation {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 15px;
+}

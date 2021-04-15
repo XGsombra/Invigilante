@@ -1,0 +1,27 @@
+<mat-toolbar class="tool-bar" color='primary'>
+    <mat-toolbar-row>
+
+        <a mat-button class="site-name" (click)="home()">
+            <span class="display-2">Invigilante</span>
+        </a>
+    
+        <span class="spacer"></span>
+
+        <div *ngIf="this.router.url === '/welcome'">
+            <a mat-icon-button (click)="renderSignin()">
+                <mat-icon>login</mat-icon>
+            </a>
+        </div>
+
+        <div *ngIf="this.cookieService.get('email') !== ''">
+            <a mat-icon-button (click)="renderUserInfo()">
+                <mat-icon>perm_identity</mat-icon>
+            </a>
+
+            <a mat-icon-button (click)="signOut()">
+                <mat-icon>logout</mat-icon>
+            </a>
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>

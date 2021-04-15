@@ -1,0 +1,24 @@
+<div *ngIf="this.userService.isInstructor()" class="course-creation-field">
+  <!-- <mat-form-field class="course-form-field">
+    <mat-label>Enter the course name here</mat-label>
+    <input matInput type="text" [(ngModel)]="courseName" (keyup.enter)="addExam()">
+    <button mat-button *ngIf="courseName" matSuffix mat-icon-button aria-label="Clear" (click)="courseName=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field> -->
+  <!-- <button mat-stroked-button class="btn-block course-creation-button" color="{{courseName === '' ? 'accent' : 'primary'}}" (click)="addExam()">Submit</button> -->
+  <button mat-button (click)="renderNewExamForm()">
+    Create a new exam
+  </button>
+</div>
+
+<mat-grid-list cols='1' rowHeight='60px'>
+
+  <mat-grid-tile *ngFor="let entry of entries" class="entry" [colspan]=1 [rowspan]=1 [style.background]="'grey'">
+    <app-dashboard-entry [course]="entry"></app-dashboard-entry>
+    <button mat-button (click)="deleteExam(entry)" *ngIf="this.userService.isInstructor()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-grid-tile>
+
+</mat-grid-list>

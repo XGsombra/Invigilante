@@ -1,0 +1,9 @@
+<div *ngIf="!this.uploaded">
+    <span>As a student, you need to upload a clear picture of your institution ID:</span>
+    <input #idInput hidden="true" type="file" (change)="idInputChange($event)" accept="image/*"/>
+    <button mat-button color="primary" (click)="idInput.click()">Upload ID</button>
+</div>
+
+<div *ngIf="this.uploaded">
+    ID uploaded
+</div>

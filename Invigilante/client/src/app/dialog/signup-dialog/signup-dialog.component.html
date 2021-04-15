@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Sign up</mat-card-title>
+    </mat-card-header>
+
+    <div *ngIf="signupError">{{signupError}}</div>
+
+    <form class="signin-form">
+      <mat-card-content>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="email" placeholder="Email" type="email" name="email" ngModel email="true" required/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="username" placeholder="Username" name="username" required/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="password" placeholder="Password" type="password" name="password" required/>
+        </mat-form-field>
+
+        <!-- <section class="radiobutton-section">
+          <mat-radio-group [(ngModel)]="selectedRole" name="roleOption">
+            <mat-radio-button class="radiobutton-margin" [value]="1" [checked]="1===1">Student</mat-radio-button>
+            <mat-radio-button class="radiobutton-margin" [value]="0">Instructor</mat-radio-button>
+          </mat-radio-group>
+        </section> -->
+
+      </mat-card-content>
+
+      <button mat-stroked-button color="accent" class="btn-block" color="primary" (click)="signup()">Sign up</button>
+    </form>
+  </mat-card>
+
+</div>
